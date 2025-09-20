@@ -41,6 +41,18 @@ nav a:hover {
     width: 5rem;
     margin-bottom: 1rem;
 }
+.letra_verde {
+    color: white;
+    background-color: green;
+}
+.letra_amarela {
+    color: white;
+    background-color:goldenrod;
+}
+.letra_cinza {
+    color: white;
+    background-color: gray;
+}
 footer {
     margin-top: 2rem;
     font-size: 1.5rem;
