@@ -36,3 +36,7 @@ nav a:hover {
     width: 1px;
     color: #654321;
 }
+footer {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+}
