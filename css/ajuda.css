@@ -1,6 +1,15 @@
+main {
+    width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+main h2, main h3, main li, main p {
+    text-align: left;
+    margin-bottom: 5px;
+}
 h2 {
     font-size: 2rem;
 }
-h3, ul, p {
+main h3, main ul, main p {
     font-size: 1.5rem;
 }
