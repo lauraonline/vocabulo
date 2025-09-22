@@ -18,7 +18,6 @@ adivinhar.addEventListener("click", function() {
         palavraArray[i] = palavra[i].value;
     }
     palavraString = palavraArray.join("");
-    alert(palavraString);
     // TODO: verificar se o palpite feito pelo usuário está vazio ou não tem 5 letras
     // TODO: organizar o eventlistener pra chamar funções que chamam funções etc
     if (palavraString == chave) {
@@ -51,3 +50,10 @@ adivinhar.addEventListener("click", function() {
         document.querySelector(".letra1:not(:disabled)").focus(); // automaticamente posiciona o cursor na próxima linha
     }
 });
+
+function proximoCampo (atual, proximo) {
+    let seletorProxCampoEditavel = proximo + ":not(:disabled)"
+    if (atual.value.length >= atual.maxLength) {
+        document.querySelector(seletorProxCampoEditavel).focus();
+    }
+}
