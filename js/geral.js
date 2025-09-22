@@ -12,38 +12,38 @@ for (let i = 0; i < todasLetras.length; i++) {
 }
 
 adivinhar.addEventListener("click", function() {
-    const palpite = [];
-    for (let i = 0; i < 5; i++) { // recolher todas as letras e preencher o vetor palpite
-        let seletorLetraAtual = ".letra" + (i+1) + ":not(:disabled, .letra_verde, .letra_amarela, .letra_cinza)";
-        palpite[i] = document.querySelector(seletorLetraAtual).value;
+    const palavra = document.querySelectorAll(".letra:not(:disabled)");
+    const palavraArray = [];
+    for (let i = 0; i < palavra.length; i++) {
+        palavraArray[i] = palavra[i].value;
     }
-    palpiteString = palpite.join("");
+    palavraString = palavraArray.join("");
+    alert(palavraString);
     // TODO: verificar se o palpite feito pelo usuário está vazio ou não tem 5 letras
     // TODO: organizar o eventlistener pra chamar funções que chamam funções etc
-    if (palpiteString == chave) {
+    if (palavraString == chave) {
         for (let i = 0; i < 5; i++) { // procedimento de vitória
-            let seletorLetraAtual = ".letra" + (i+1) + ":not(:disabled)";
-            document.querySelector(seletorLetraAtual).classList.add("letra_verde");
-            document.querySelector(seletorLetraAtual).setAttribute("disabled", "true");
+            palavra[i].classList.add("letra_verde");
+            palavra[i].setAttribute("disabled", "true");
         }
         alert("Parabéns, você adivinhou a palavra!");
         document.querySelector(".adivinhar").style.display = "none";
     } else {
         for (let i = 0; i < 5; i++) { // colorir cada letra adequadamente
-            let seletorLetraAtual = ".letra" + (i+1) + ":not(:disabled)";
-            if (chave.includes(palpite[i])) {
-                if (palpite[i] == chave[i]) { // letra atual = verde
-                    document.querySelector(seletorLetraAtual).classList.add("letra_verde");
-                    document.querySelector(seletorLetraAtual).setAttribute("disabled", "true")
+            if (chave.includes(palavraString[i])) {
+                if (palavraString[i] == chave[i]) { // letra atual = verde
+                    palavra[i].classList.add("letra_verde");
+                    palavra[i].setAttribute("disabled", "true")
                 } else { // letra atual = amarela
-                    document.querySelector(seletorLetraAtual).classList.add("letra_amarela");
-                    document.querySelector(seletorLetraAtual).setAttribute("disabled", "true")
+                    palavra[i].classList.add("letra_amarela");
+                    palavra[i].setAttribute("disabled", "true")
                 }
             } else { // letra atual = cinza
-                document.querySelector(seletorLetraAtual).classList.add("letra_cinza");
-                document.querySelector(seletorLetraAtual).setAttribute("disabled", "true")
+                palavra[i].classList.add("letra_cinza");
+                palavra[i].setAttribute("disabled", "true")
             }
         }
+        // TODO: Analisar se dá pra fazer as funções abaixo SEM usar as classes índice (.letra1, .letra2, etc), pra viabilizar a remoção das classes índice
         for (let i = 0; i < 5; i++) { // fazer com que a próxima linha esteja editável
             let seletorProxLetra = ".letra" + (i+1) + ":not(.letra_verde, .letra_amarela, .letra_cinza)";
             document.querySelector(seletorProxLetra).removeAttribute("disabled");
