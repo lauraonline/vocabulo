@@ -40,7 +40,7 @@ nav a:hover, .adivinhar:hover {
     width: 1px;
     color: #654321;
 }
-.letra1, .letra2, .letra3, .letra4, .letra5 {
+.letra {
     font-size: 5rem;
     width: 5rem;
     margin-bottom: 1rem;
