@@ -11,6 +11,7 @@ for (let i = 0; i < todasLetras.length; i++) {
     }
 }
 
+// TODO: implementar apertar ENTER pra clicar no botão de adivinhar
 adivinhar.addEventListener("click", function() {
     const palavra = document.querySelectorAll(".letra:not(:disabled)");
     const palavraArray = [];
