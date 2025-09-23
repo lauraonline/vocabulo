@@ -7,13 +7,15 @@ for (let i = 0; i < todasLetras.length; i++) {
     if (i > 4) {
         todasLetras[i].setAttribute("disabled", "true"); // todos os campos após o quinto começam desativados
     }
-    todasLetras[i].addEventListener("keypress", function(event) { // lógica pra que o usuário possa apertar ENTER ao invés de clicar em adivinhar
+    todasLetras[i].addEventListener("keyup", function(event) { // lógica pra que o usuário possa apertar ENTER ao invés de clicar em adivinhar
         if (event.key == "Enter") {
             adivinhar.click();
-        }
-        if (event.key == "Backspace" ) {
-            todasLetras[i-1].focus();
-            todasLetras[i-1].value = null;
+        } else
+        if ((event.key == "Backspace") &&
+            (todasLetras[i] != document.querySelector(".letra:not(:disabled"))) {
+                // TODO: Adicionar lógica pra verificar se a letra atual não é a última
+                todasLetras[i-1].focus();
+                todasLetras[i-1].value = null;
         }
     });
 }
