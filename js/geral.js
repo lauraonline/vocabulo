@@ -1,17 +1,24 @@
 const chave = "linha";
-const teste = document.querySelector(".teste");
 const adivinhar = document.querySelector(".adivinhar");
-const quantidadeDeLetrasEm1Palavra = 5;
 
 const todasLetras = document.querySelectorAll(".letra");
 for (let i = 0; i < todasLetras.length; i++) {
-    todasLetras[i].value = null;
-    if (i > quantidadeDeLetrasEm1Palavra - 1) {
-        todasLetras[i].setAttribute("disabled", "true");
+    todasLetras[i].value = null; // todos os campos começam vazios
+    if (i > 4) {
+        todasLetras[i].setAttribute("disabled", "true"); // todos os campos após o quinto começam desativados
     }
+    todasLetras[i].addEventListener("keypress", function(event) { // lógica pra que o usuário possa apertar ENTER ao invés de clicar em adivinhar
+        if (event.key == "Enter") {
+            adivinhar.click();
+        }
+        if (event.key == "Backspace" ) {
+            todasLetras[i-1].focus();
+            todasLetras[i-1].value = null;
+        }
+    });
 }
 
-// TODO: implementar apertar ENTER pra clicar no botão de adivinhar
+// TODO: implementar apertar BACKSPACE pra apagar a letra atual e voltar à anterior
 adivinhar.addEventListener("click", function() {
     const palavra = document.querySelectorAll(".letra:not(:disabled)");
     const palavraArray = [];
@@ -19,6 +26,7 @@ adivinhar.addEventListener("click", function() {
         palavraArray[i] = palavra[i].value;
     }
     palavraString = palavraArray.join("");
+    // TODO: implementar lógica pra não marcar letras que já estão verdes e não tem mais na palavra como amarelas quando estão em outro campo da palavra
     // TODO: verificar se o palpite feito pelo usuário está vazio ou não tem 5 letras
     // TODO: organizar o eventlistener pra chamar funções que chamam funções etc
     if (palavraString == chave) {
