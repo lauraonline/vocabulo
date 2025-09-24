@@ -3,20 +3,20 @@ const adivinhar = document.querySelector(".adivinhar");
 
 const todasLetras = document.querySelectorAll(".letra");
 for (let i = 0; i < todasLetras.length; i++) {
-    todasLetras[i].value = null; // todos os campos começam vazios
+    todasLetras[i].value = null; // todos os campos começam vazios pra evitar que um jogo em progresso persista entre recarregamentos
     if (i > 4) {
-        todasLetras[i].setAttribute("disabled", "true"); // todos os campos após o quinto começam desativados
+        todasLetras[i].setAttribute("disabled", "true"); // todos os campos após o quinto começam desativados, pra evitar que um jogo em progresso persista entre recarregamentos
     }
-    todasLetras[i].addEventListener("keyup", function(event) { // lógica pra que o usuário possa apertar ENTER ao invés de clicar em adivinhar
+    todasLetras[i].addEventListener("keydown", function(event) { // lógica pra que o usuário possa apertar ENTER ao invés de clicar em adivinhar
         if (event.key == "Enter") {
             adivinhar.click();
         } else
         if ((event.key == "Backspace") &&
-            (todasLetras[i] != document.querySelector(".letra:not(:disabled"))) {
-                // TODO: Adicionar lógica pra verificar se a letra atual não é a última
+            (todasLetras[i] != document.querySelector(".letra:not(:disabled")) &&
+            (todasLetras[i].value == "")) {
                 todasLetras[i-1].focus();
                 todasLetras[i-1].value = null;
-        }
+        } 
     });
 }
 
