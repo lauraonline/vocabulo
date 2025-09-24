@@ -1,26 +1,31 @@
+// constantes e botões
 const chave = "linha";
 const adivinhar = document.querySelector(".adivinhar");
 
+// funções
+
+
+// lógica a ser executada no momento de carregamento da página
 const todasLetras = document.querySelectorAll(".letra");
 for (let i = 0; i < todasLetras.length; i++) {
-    todasLetras[i].value = null; // todos os campos começam vazios pra evitar que um jogo em progresso persista entre recarregamentos
+    todasLetras[i].value = null; // nulificar todos os campos pra evitar que um jogo em progresso persista entre recarregamentos
     if (i > 4) {
-        todasLetras[i].setAttribute("disabled", "true"); // todos os campos após o quinto começam desativados, pra evitar que um jogo em progresso persista entre recarregamentos
+        todasLetras[i].setAttribute("disabled", "true"); // desativar todos os campos após o quinto pra evitar que um jogo em progresso persista entre recarregamentos
     }
-    todasLetras[i].addEventListener("keydown", function(event) { // lógica pra que o usuário possa apertar ENTER ao invés de clicar em adivinhar
-        if (event.key == "Enter") {
+    todasLetras[i].addEventListener("keydown", function(event) {
+        if (event.key == "Enter") { // ativar o botão "adivinhar" com a tecla ENTER, pra melhor jogabilidade sem precisar usar o mouse
             adivinhar.click();
         } else
         if ((event.key == "Backspace") &&
-            (todasLetras[i] != document.querySelector(".letra:not(:disabled")) &&
-            (todasLetras[i].value == "")) {
+            (todasLetras[i] != document.querySelector(".letra:not(:disabled")) && // não aplicar este comportamento ao primeiro campo de uma linha, pelo risco de "focar" o último campo da linha anterior
+            (todasLetras[i].value == "")) { // apagar a última letra inserida com a tecla BACKSPACE, pra melhor jogabilidade sem precisar usar o mouse
                 todasLetras[i-1].focus();
                 todasLetras[i-1].value = null;
         } 
     });
 }
 
-// TODO: implementar apertar BACKSPACE pra apagar a letra atual e voltar à anterior
+// lógica a ser atrelada ao botão "adivinhar"
 adivinhar.addEventListener("click", function() {
     const palavra = document.querySelectorAll(".letra:not(:disabled)");
     const palavraArray = [];
@@ -62,9 +67,10 @@ adivinhar.addEventListener("click", function() {
     }
 });
 
-function proximoCampo (atual, proximo) {
-    let seletorProxCampoEditavel = proximo + ":not(:disabled)"
-    if (atual.value.length >= atual.maxLength) {
-        document.querySelector(seletorProxCampoEditavel).focus();
-    }
-}
+// TODO: ver no git quando foi que eu escrevi essa função pq eu não lembro
+// function proximoCampo (atual, proximo) {
+//     let seletorProxCampoEditavel = proximo + ":not(:disabled)"
+//     if (atual.value.length >= atual.maxLength) {
+//         document.querySelector(seletorProxCampoEditavel).focus();
+//     }
+// }
