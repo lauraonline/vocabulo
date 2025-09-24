@@ -5,6 +5,7 @@ const adivinhar = document.querySelector(".adivinhar");
 // funções
 
 
+// TODO: Usar comparador estrito quando for apropriado
 // lógica a ser executada no momento de carregamento da página
 const todasLetras = document.querySelectorAll(".letra");
 for (let i = 0; i < todasLetras.length; i++) {
