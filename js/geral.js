@@ -20,6 +20,13 @@ function palavraToString(palavra) {
     }
     return palavraArray.join("");
 }
+function selecaoeExclusaoValor (lista, valor) {
+    for (let i = 0; i < lista.length; i++) {
+        if (lista[i] === valor) {
+            lista[i] = null;
+        }
+    }
+}
 
 // TODO: Implementar flexbox
 // TODO: Implementar dark mode
@@ -34,12 +41,12 @@ for (let i = 0; i < todasLetras.length; i++) {
         todasLetras[i].setAttribute("disabled", "true"); // desativar todos os campos após o quinto pra evitar que um jogo em progresso persista entre recarregamentos
     }
     todasLetras[i].addEventListener("keydown", function(event) {
-        if (event.key == "Enter") { // ativar o botão "adivinhar" com a tecla ENTER, pra melhor jogabilidade sem precisar usar o mouse
+        if (event.key === "Enter") { // ativar o botão "adivinhar" com a tecla ENTER, pra melhor jogabilidade sem precisar usar o mouse
             adivinhar.click();
         } else
-        if ((event.key == "Backspace") &&
+        if ((event.key === "Backspace") &&
             (todasLetras[i] != document.querySelector(".letra:not(:disabled")) && // não aplicar este comportamento ao primeiro campo de uma linha, pelo risco de "focar" o último campo da linha anterior
-            (todasLetras[i].value == "")) { // apagar a última letra inserida com a tecla BACKSPACE, pra melhor jogabilidade sem precisar usar o mouse
+            (todasLetras[i].value === "")) { // apagar a última letra inserida com a tecla BACKSPACE, pra melhor jogabilidade sem precisar usar o mouse
                 todasLetras[i-1].focus();
                 todasLetras[i-1].value = null;
         } 
@@ -53,7 +60,7 @@ adivinhar.addEventListener("click", function() {
     // TODO: implementar lógica pra não marcar letras que já estão verdes e não tem mais na palavra como amarelas quando estão em outro campo da palavra
     // TODO: verificar se o palpite feito pelo usuário está vazio ou não tem 5 letras
     // TODO: organizar o eventlistener pra chamar funções que chamam funções etc
-    if (palavraString == chave) {
+    if (palavraString === chave) {
         for (let i = 0; i < 5; i++) { // procedimento de vitória
             palavra[i].classList.add("letra_verde");
             palavra[i].setAttribute("disabled", "true");
@@ -63,16 +70,16 @@ adivinhar.addEventListener("click", function() {
     } else {
         for (let i = 0; i < 5; i++) { // colorir cada letra adequadamente
             if (chave.includes(palavraString[i])) {
-                if (palavraString[i] == chave[i]) { // letra atual = verde
+                if (palavraString[i] === chave[i]) { // letra atual = verde
                     palavra[i].classList.add("letra_verde");
-                    palavra[i].setAttribute("disabled", "true")
+                    palavra[i].setAttribute("disabled", "true");
                 } else { // letra atual = amarela
                     palavra[i].classList.add("letra_amarela");
-                    palavra[i].setAttribute("disabled", "true")
+                    palavra[i].setAttribute("disabled", "true");
                 }
             } else { // letra atual = cinza
                 palavra[i].classList.add("letra_cinza");
-                palavra[i].setAttribute("disabled", "true")
+                palavra[i].setAttribute("disabled", "true");
             }
         }
         // TODO: Analisar se dá pra fazer as funções abaixo SEM usar as classes índice (.letra1, .letra2, etc), pra viabilizar a remoção das classes índice
