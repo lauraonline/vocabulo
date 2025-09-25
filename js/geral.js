@@ -5,6 +5,10 @@ const adivinhar = document.querySelector(".adivinhar");
 // funções
 
 
+// TODO: Implementar flexbox
+// TODO: Implementar dark mode
+// TODO: Implementar leaderboard
+// TODO: Adicionar CRUD de alguma maneira (talvez implementar dicionário)
 // TODO: Usar comparador estrito quando for apropriado
 // lógica a ser executada no momento de carregamento da página
 const todasLetras = document.querySelectorAll(".letra");
