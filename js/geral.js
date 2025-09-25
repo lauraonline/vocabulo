@@ -4,6 +4,22 @@ const adivinhar = document.querySelector(".adivinhar");
 
 // funções
 
+// function tratamentoEntradaUsuario(event) {
+//     
+// }
+function proximoCampo (atual, proximo) { // essa função é chamada diretamente no html
+    let seletorProxCampoEditavel = proximo + ":not(:disabled)"
+    if (atual.value.length >= atual.maxLength) {
+        document.querySelector(seletorProxCampoEditavel).focus();
+    }
+}
+function palavraToString(palavra) {
+    const palavraArray = [];
+    for (let i = 0; i < palavra.length; i++) {
+        palavraArray[i] = palavra[i].value;
+    }
+    return palavraArray.join("");
+}
 
 // TODO: Implementar flexbox
 // TODO: Implementar dark mode
@@ -33,11 +49,7 @@ for (let i = 0; i < todasLetras.length; i++) {
 // lógica a ser atrelada ao botão "adivinhar"
 adivinhar.addEventListener("click", function() {
     const palavra = document.querySelectorAll(".letra:not(:disabled)");
-    const palavraArray = [];
-    for (let i = 0; i < palavra.length; i++) {
-        palavraArray[i] = palavra[i].value;
-    }
-    palavraString = palavraArray.join("");
+    const palavraString = palavraToString(palavra);
     // TODO: implementar lógica pra não marcar letras que já estão verdes e não tem mais na palavra como amarelas quando estão em outro campo da palavra
     // TODO: verificar se o palpite feito pelo usuário está vazio ou não tem 5 letras
     // TODO: organizar o eventlistener pra chamar funções que chamam funções etc
@@ -72,10 +84,3 @@ adivinhar.addEventListener("click", function() {
     }
 });
 
-// TODO: ver no git quando foi que eu escrevi essa função pq eu não lembro
-// function proximoCampo (atual, proximo) {
-//     let seletorProxCampoEditavel = proximo + ":not(:disabled)"
-//     if (atual.value.length >= atual.maxLength) {
-//         document.querySelector(seletorProxCampoEditavel).focus();
-//     }
-// }
