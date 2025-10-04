@@ -28,7 +28,6 @@ function selecaoeExclusaoValor (lista, valor) {
     }
 }
 
-// TODO: usar LocalStorage
 // TODO: Usar criação dinâmica de elementos (createElement, appendChild, remove)
 // lógica a ser executada no momento de carregamento da página
 const todasLetras = document.querySelectorAll(".letra");
