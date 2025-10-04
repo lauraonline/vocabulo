@@ -1,12 +1,36 @@
 // constantes e botões
 const chave = "linha";
 const adivinhar = document.querySelector(".adivinhar");
+const palpites = document.querySelector(".palpites");
+const mainElement = document.querySelector("main");
 
 // funções
 
 // function tratamentoEntradaUsuario(event) {
 //     
 // }
+function criarPopup(texto, duracao) {
+    const popupExistente = document.querySelector(".popup");
+    if (popupExistente != null) {
+        popupExistente.remove();
+    }
+    const popup = document.createElement("div");
+    popup.textContent = texto;
+    popup.classList.add("popup");
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+        popup.remove();
+    }, duracao);
+}
+function fimDeJogo(isGanhou) {
+    vitoria = "Parabéns, você acertou!"
+    derrota = "Fim de jogo! A palavra era " + chave;
+    const msg = isGanhou ? vitoria : derrota; 
+    criarPopup(msg, 5000);
+    adivinhar.style.display = "none";
+    // TODO: ligar visibilidade do botão REINICIAR
+}
 function proximoCampo (atual, proximo) { // essa função é chamada diretamente no html
     let seletorProxCampoEditavel = proximo + ":not(:disabled)"
     if (atual.value.length >= atual.maxLength) {
