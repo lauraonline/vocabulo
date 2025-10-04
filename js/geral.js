@@ -89,4 +89,3 @@ adivinhar.addEventListener("click", function() {
         document.querySelector(".letra1:not(:disabled)").focus(); // automaticamente posiciona o cursor na próxima linha
     }
 });
-

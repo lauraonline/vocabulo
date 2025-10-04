@@ -1,3 +1,8 @@
+:root {
+    --darkbisque: #432818;
+    --darkburly: #99582a;
+    --darkspecialtext: #ffe6a7;
+}
 * {
     font-family: monospace;
     text-align: center;
@@ -8,6 +13,42 @@ body {
     height: 100vh;
     background-color: bisque;
 }
+body.dark {
+    background-color: var(--darkbisque);
+    nav {
+        background-color: var(--darkburly);
+    }
+    nav a, .adivinhar, #dark {
+        color: var(--darkspecialtext);
+    }
+    nav a:hover, .adivinhar:hover, #dark:hover {
+       background-color: burlywood;
+       color: var(--darkburly);
+    }
+    .letra {
+        background-color: black;
+        color: white;
+    }
+    .letra:disabled {
+        background-color: var(--darkburly);
+    }
+    /* usando :disabled aqui pra bater a especificidade CSS do .letra:disabled acima */
+    .letra_verde:disabled { 
+        color: white;
+        background-color: green;
+    }
+    .letra_amarela:disabled {
+        color: white;
+        background-color:goldenrod;
+    }
+    .letra_cinza:disabled {
+        color: white;
+        background-color: gray;
+    }
+    h2, h3, li, p, a {
+        color: var(--darkspecialtext);
+    }
+}
 .nowrap {
     text-wrap: nowrap;
 }
@@ -15,17 +56,20 @@ nav {
     padding: 20px;
     margin-bottom: 2rem;
     background-color: burlywood;
+    box-shadow: 0px 0.25rem 0.75rem;
+}
+nav a, .adivinhar, #dark {
+    background-color: transparent;
+    border: none;
     font-size: 2.5rem;
     font-weight: 700;
-    box-shadow: 0px 0.25rem 0.75rem gray;
-}
-nav a, .adivinhar {
     color: #654321;
-    padding: 1rem;
+    padding: 2rem;
     border-radius: 1rem;
     text-decoration: none;
+    cursor: pointer;
 }
-nav a:hover, .adivinhar:hover {
+nav a:hover, .adivinhar:hover, #dark:hover {
     background-color: #654321;
     color: burlywood;
     transition: background-color 400ms, color 300ms;
@@ -33,12 +77,6 @@ nav a:hover, .adivinhar:hover {
 .adivinhar {
     font-size: 2rem;
     cursor: pointer;
-}
-.separador-nav {
-    margin-left: 2px;
-    margin-right: 2px;
-    width: 1px;
-    color: #654321;
 }
 .palpite form {
     display: flex;
@@ -49,6 +87,7 @@ nav a:hover, .adivinhar:hover {
 .letra {
     font-size: 5rem;
     width: 5rem;
+    border: 0px;
 }
 .letra_verde {
     color: white;
