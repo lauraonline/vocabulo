@@ -28,10 +28,8 @@ function selecaoeExclusaoValor (lista, valor) {
     }
 }
 
-// TODO: Implementar dark mode
-// TODO: Implementar leaderboard
-// TODO: Adicionar CRUD de alguma maneira (talvez implementar dicionário)
-// TODO: Usar comparador estrito quando for apropriado
+// TODO: usar LocalStorage
+// TODO: Usar criação dinâmica de elementos (createElement, appendChild, remove)
 // lógica a ser executada no momento de carregamento da página
 const todasLetras = document.querySelectorAll(".letra");
 for (let i = 0; i < todasLetras.length; i++) {
