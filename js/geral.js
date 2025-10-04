@@ -28,7 +28,6 @@ function selecaoeExclusaoValor (lista, valor) {
     }
 }
 
-// TODO: Implementar flexbox
 // TODO: Implementar dark mode
 // TODO: Implementar leaderboard
 // TODO: Adicionar CRUD de alguma maneira (talvez implementar dicionário)

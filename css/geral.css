@@ -40,10 +40,15 @@ nav a:hover, .adivinhar:hover {
     width: 1px;
     color: #654321;
 }
+.palpite form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
 .letra {
     font-size: 5rem;
     width: 5rem;
-    margin-bottom: 1rem;
 }
 .letra_verde {
     color: white;
