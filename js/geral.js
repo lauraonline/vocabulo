@@ -54,7 +54,6 @@ for (let i = 0; i < todasLetras.length; i++) {
 adivinhar.addEventListener("click", function() {
     const palavra = document.querySelectorAll(".letra:not(:disabled)");
     const palavraString = palavraToString(palavra);
-    // TODO: implementar lógica pra não marcar letras que já estão verdes e não tem mais na palavra como amarelas quando estão em outro campo da palavra
     // TODO: verificar se o palpite feito pelo usuário está vazio ou não tem 5 letras
     // TODO: organizar o eventlistener pra chamar funções que chamam funções etc
     if (palavraString === chave) {
@@ -64,20 +63,31 @@ adivinhar.addEventListener("click", function() {
         }
         alert("Parabéns, você adivinhou a palavra!");
         document.querySelector(".adivinhar").style.display = "none";
-    } else {
-        for (let i = 0; i < 5; i++) { // colorir cada letra adequadamente
-            if (chave.includes(palavraString[i])) {
-                if (palavraString[i] === chave[i]) { // letra atual = verde
-                    palavra[i].classList.add("letra_verde");
-                    palavra[i].setAttribute("disabled", "true");
-                } else { // letra atual = amarela
-                    palavra[i].classList.add("letra_amarela");
-                    palavra[i].setAttribute("disabled", "true");
-                }
-            } else { // letra atual = cinza
-                palavra[i].classList.add("letra_cinza");
-                palavra[i].setAttribute("disabled", "true");
+    } else { // procedimento de coloração das letras
+        let chaveArray = chave.split('');
+        let resultados = [];
+        for (let i = 0; i < 5; i++) { // definir letras verdes
+            if (palavraString[i] === chaveArray[i]) {
+                resultados[i] = "verde";
+                chaveArray[i] = null; // nulificar as letras VERDES em seus índices pra evitar "amarelação" inadequada de letras  que se repetem numa palavra
             }
+        }
+        for (let i = 0; i < 5; i++) { // definir amarelas e cinza
+            if (resultados[i] === 'verde') {
+                continue;
+            }
+            isLetraAmarela = chaveArray.indexOf(palavraString[i]); // ISSO NÃO É UMA BOOLEANA, mas na prática funciona como uma booleana. -1 = false, qualquer outro número = true, e ainda por cima retorna o índice caso seja true.
+            if (isLetraAmarela != -1) { // basicamente um check booleano
+                resultados[i] = "amarela";
+                chaveArray[isLetraAmarela] = null; // novamente, nulifica as letras AMARELAS pelo mesmo motivo das verdes
+            } else {
+                resultados[i] = "cinza";
+            }
+        }
+        for (let i = 0; i < 5; i++) { // APLICAR verdes, amarelas e cinzas
+            let classString = "letra_" + resultados[i];
+            palavra[i].classList.add(classString);
+            palavra[i].setAttribute("disabled", "true");
         }
         // TODO: Analisar se dá pra fazer as funções abaixo SEM usar as classes índice (.letra1, .letra2, etc), pra viabilizar a remoção das classes índice
         for (let i = 0; i < 5; i++) { // fazer com que a próxima linha esteja editável
