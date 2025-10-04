@@ -53,9 +53,17 @@ for (let i = 0; i < todasLetras.length; i++) {
 // lógica a ser atrelada ao botão "adivinhar"
 adivinhar.addEventListener("click", function() {
     const palavra = document.querySelectorAll(".letra:not(:disabled)");
-    const palavraString = palavraToString(palavra);
-    // TODO: verificar se o palpite feito pelo usuário está vazio ou não tem 5 letras
+    const palavraString = palavraToString(palavra).toLowerCase();
     // TODO: organizar o eventlistener pra chamar funções que chamam funções etc
+    if (palavraString.length != 5) {
+        alert("Tem algum campo vazio no seu palpite! Não pode. Preencha todos os campos.");
+        return;
+    }
+    const validacaoRegex = /^[a-z]+$/;
+    if (validacaoRegex.test(palavraString) === false) {
+        alert("Todos os campos do seu palpite devem ser letras!");
+        return;
+    }
     if (palavraString === chave) {
         for (let i = 0; i < 5; i++) { // procedimento de vitória
             palavra[i].classList.add("letra_verde");
