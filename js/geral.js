@@ -2,7 +2,7 @@
 const chave = "linha";
 const adivinhar = document.querySelector(".adivinhar");
 const palpites = document.querySelector(".palpites");
-const mainElement = document.querySelector("main");
+const todasLetras = document.querySelectorAll(".letra");
 
 // funções
 
@@ -14,6 +14,7 @@ function criarPopup(texto, duracao) {
     if (popupExistente != null) {
         popupExistente.remove();
     }
+
     const popup = document.createElement("div");
     popup.textContent = texto;
     popup.classList.add("popup");
@@ -23,13 +24,34 @@ function criarPopup(texto, duracao) {
         popup.remove();
     }, duracao);
 }
+function reiniciarJogo() {
+    for (let i = 0; i < todasLetras.length; i++) {
+        todasLetras[i].value = null;
+        if (i > 4) {
+            todasLetras[i].setAttribute("disabled", "true");
+            todasLetras[i].classList.remove("letra_verde", "letra_amarela", "letra_cinza");
+        }
+    }
+    adivinhar.style.display = "block";
+    if (document.querySelector("reiniciar")) {
+        document.querySelector("reiniciar").remove();
+    }
+    document.querySelector(".letra1:not(:disabled)").focus();
+}
 function fimDeJogo(isGanhou) {
     vitoria = "Parabéns, você acertou!"
     derrota = "Fim de jogo! A palavra era " + chave;
     const msg = isGanhou ? vitoria : derrota; 
+
     criarPopup(msg, 5000);
     adivinhar.style.display = "none";
-    // TODO: ligar visibilidade do botão REINICIAR
+
+    const reiniciar = document.createElement("button");
+    reiniciar.textContent = "jogar novamente";
+    reiniciar.classList.add("reiniciar");
+
+    reiniciar.addEventListener("click", reiniciarJogo);
+    document.querySelector("main").appendChild(reiniciar);
 }
 function proximoCampo (atual, proximo) { // essa função é chamada diretamente no html
     let seletorProxCampoEditavel = proximo + ":not(:disabled)"
@@ -54,7 +76,6 @@ function selecaoeExclusaoValor (lista, valor) {
 
 // TODO: Usar criação dinâmica de elementos (createElement, appendChild, remove)
 // lógica a ser executada no momento de carregamento da página
-const todasLetras = document.querySelectorAll(".letra");
 for (let i = 0; i < todasLetras.length; i++) {
     todasLetras[i].value = null; // nulificar todos os campos pra evitar que um jogo em progresso persista entre recarregamentos
     if (i > 4) {
