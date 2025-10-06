@@ -27,15 +27,15 @@ function criarPopup(texto, duracao) {
 function reiniciarJogo() {
     for (let i = 0; i < todasLetras.length; i++) {
         todasLetras[i].value = null;
-        if (i > 4) {
+        todasLetras[i].classList.remove("letra_verde", "letra_amarela", "letra_cinza");
+        if (i < 5) {
+            todasLetras[i].removeAttribute("disabled");
+        } else {
             todasLetras[i].setAttribute("disabled", "true");
-            todasLetras[i].classList.remove("letra_verde", "letra_amarela", "letra_cinza");
         }
     }
-    adivinhar.style.display = "block";
-    if (document.querySelector("reiniciar")) {
-        document.querySelector("reiniciar").remove();
-    }
+    adivinhar.style.display = "inline-block";
+    document.querySelector(".reiniciar").remove();
     document.querySelector(".letra1:not(:disabled)").focus();
 }
 function fimDeJogo(isGanhou) {
@@ -51,7 +51,7 @@ function fimDeJogo(isGanhou) {
     reiniciar.classList.add("reiniciar");
 
     reiniciar.addEventListener("click", reiniciarJogo);
-    document.querySelector("main").appendChild(reiniciar);
+    document.querySelector(".botaoPrincipal").appendChild(reiniciar);
 }
 function proximoCampo (atual, proximo) { // essa função é chamada diretamente no html
     let seletorProxCampoEditavel = proximo + ":not(:disabled)"
@@ -93,6 +93,7 @@ for (let i = 0; i < todasLetras.length; i++) {
         } 
     });
 }
+todasLetras[0].focus();
 
 // lógica a ser atrelada ao botão "adivinhar"
 adivinhar.addEventListener("click", function() {
@@ -100,12 +101,13 @@ adivinhar.addEventListener("click", function() {
     const palavraString = palavraToString(palavra).toLowerCase();
     // TODO: organizar o eventlistener pra chamar funções que chamam funções etc
     if (palavraString.length != 5) {
-        alert("Tem algum campo vazio no seu palpite! Não pode. Preencha todos os campos.");
+        criarPopup("Preencha todos os campos!", 5000)
         return;
     }
+    // TODO: ver se tem um jeito melhor de validar pra apenas letras
     const validacaoRegex = /^[a-z]+$/;
     if (validacaoRegex.test(palavraString) === false) {
-        alert("Todos os campos do seu palpite devem ser letras!");
+        criarPopup("Todos os campos do seu palpite devem ser letras!", 5000);
         return;
     }
     if (palavraString === chave) {
@@ -113,8 +115,7 @@ adivinhar.addEventListener("click", function() {
             palavra[i].classList.add("letra_verde");
             palavra[i].setAttribute("disabled", "true");
         }
-        alert("Parabéns, você adivinhou a palavra!");
-        document.querySelector(".adivinhar").style.display = "none";
+        fimDeJogo(true);
     } else { // procedimento de coloração das letras
         let chaveArray = chave.split('');
         let resultados = [];
