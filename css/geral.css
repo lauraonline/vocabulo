@@ -98,6 +98,10 @@ nav a:hover, .adivinhar:hover, .reiniciar:hover, #dark:hover {
     font-size: 2rem;
     cursor: pointer;
 }
+.resposta {
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+}
 .palpite form {
     display: flex;
     justify-content: center;

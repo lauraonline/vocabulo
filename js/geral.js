@@ -43,6 +43,9 @@ function reiniciarJogo() {
         }
     }
     adivinhar.style.display = "inline-block";
+    if (document.querySelector(".resposta")) {
+        document.querySelector(".resposta").remove();
+    }
     document.querySelector(".reiniciar").remove();
     document.querySelector(".letra1:not(:disabled)").focus();
 }
@@ -53,6 +56,13 @@ function fimDeJogo(isGanhou) {
 
     criarPopup(msg);
     adivinhar.style.display = "none";
+
+    if (isGanhou === false) {
+        const resposta = document.createElement("p");
+        resposta.textContent = "A resposta era " + chave;
+        resposta.classList.add("resposta");
+        document.querySelector(".botaoPrincipal").appendChild(resposta);
+    }
 
     const reiniciar2 = document.createElement("button");
     reiniciar2.textContent = "jogar novamente ⏎";
