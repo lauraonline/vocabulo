@@ -4,8 +4,8 @@ const adivinhar = document.querySelector(".adivinhar");
 const palpites = document.querySelector(".palpites");
 const todasLetras = document.querySelectorAll(".letra");
 
-// TODO: Fazer funcionalidade de derrota ao encher todas as linhas
-// TODO: Implementar dicionario
+// TODO: Adicionar teclado virtual
+// TODO: Implementar palavras com acento
 // funções
 
 function sortearPalavra() {
