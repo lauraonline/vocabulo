@@ -43,15 +43,15 @@ function fimDeJogo(isGanhou) {
     derrota = "Fim de jogo! A palavra era " + chave;
     const msg = isGanhou ? vitoria : derrota; 
 
-    criarPopup(msg, 5000);
+    criarPopup(msg, 3000);
     adivinhar.style.display = "none";
 
-    const reiniciar = document.createElement("button");
-    reiniciar.textContent = "jogar novamente";
-    reiniciar.classList.add("reiniciar");
+    const reiniciar2 = document.createElement("button");
+    reiniciar2.textContent = "jogar novamente ⏎";
+    reiniciar2.classList.add("reiniciar");
 
-    reiniciar.addEventListener("click", reiniciarJogo);
-    document.querySelector(".botaoPrincipal").appendChild(reiniciar);
+    reiniciar2.addEventListener("click", reiniciarJogo);
+    document.querySelector(".botaoPrincipal").appendChild(reiniciar2);
 }
 function proximoCampo (atual, proximo) { // essa função é chamada diretamente no html
     let seletorProxCampoEditavel = proximo + ":not(:disabled)"
@@ -76,15 +76,22 @@ function selecaoeExclusaoValor (lista, valor) {
 
 // TODO: Usar criação dinâmica de elementos (createElement, appendChild, remove)
 // lógica a ser executada no momento de carregamento da página
+document.addEventListener("keydown", function(event) {
+    if (event.key === "Enter") { // ativar o botão "adivinhar" ou "reiniciar" com a tecla ENTER, pra melhor jogabilidade sem precisar usar o mouse
+        const reiniciar = document.querySelector(".reiniciar");
+        if (reiniciar) {
+            reiniciar.click();
+        } else {
+            adivinhar.click();
+        }
+    } 
+});
 for (let i = 0; i < todasLetras.length; i++) {
     todasLetras[i].value = null; // nulificar todos os campos pra evitar que um jogo em progresso persista entre recarregamentos
     if (i > 4) {
         todasLetras[i].setAttribute("disabled", "true"); // desativar todos os campos após o quinto pra evitar que um jogo em progresso persista entre recarregamentos
     }
     todasLetras[i].addEventListener("keydown", function(event) {
-        if (event.key === "Enter") { // ativar o botão "adivinhar" com a tecla ENTER, pra melhor jogabilidade sem precisar usar o mouse
-            adivinhar.click();
-        } else
         if ((event.key === "Backspace") &&
             (todasLetras[i] != document.querySelector(".letra:not(:disabled")) && // não aplicar este comportamento ao primeiro campo de uma linha, pelo risco de "focar" o último campo da linha anterior
             (todasLetras[i].value === "")) { // apagar a última letra inserida com a tecla BACKSPACE, pra melhor jogabilidade sem precisar usar o mouse
@@ -101,7 +108,7 @@ adivinhar.addEventListener("click", function() {
     const palavraString = palavraToString(palavra).toLowerCase();
     // TODO: organizar o eventlistener pra chamar funções que chamam funções etc
     if (palavraString.length != 5) {
-        criarPopup("Preencha todos os campos!", 5000)
+        criarPopup("Preencha todos os campos!", 4000)
         return;
     }
     // TODO: ver se tem um jeito melhor de validar pra apenas letras

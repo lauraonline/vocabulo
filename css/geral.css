@@ -18,12 +18,17 @@ body.dark {
     nav {
         background-color: var(--darkburly);
     }
-    nav a, .adivinhar, #dark {
+    nav a, .adivinhar, .reiniciar, #dark {
         color: var(--darkspecialtext);
     }
-    nav a:hover, .adivinhar:hover, #dark:hover {
+    nav a:hover, .adivinhar:hover, .reiniciar:hover, #dark:hover {
        background-color: burlywood;
        color: var(--darkburly);
+    }
+    .popup {
+        background-color: var(--darkburly);
+        color: var(--darkspecialtext);
+        box-shadow: 0px 0.25rem 0.5rem var(--darkbisque);
     }
     .letra {
         background-color: black;
@@ -58,7 +63,7 @@ nav {
     background-color: burlywood;
     box-shadow: 0px 0.25rem 0.75rem;
 }
-nav a, .adivinhar, #dark {
+nav a, .adivinhar, .reiniciar, #dark {
     background-color: transparent;
     border: none;
     font-size: 2.5rem;
@@ -69,12 +74,26 @@ nav a, .adivinhar, #dark {
     text-decoration: none;
     cursor: pointer;
 }
-nav a:hover, .adivinhar:hover, #dark:hover {
+nav a:hover, .adivinhar:hover, .reiniciar:hover, #dark:hover {
     background-color: #654321;
     color: burlywood;
     transition: background-color 400ms, color 300ms;
 }
-.adivinhar {
+.popup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, 0);
+    background-color: burlywood;
+    color: #654321;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    z-index: 99;
+    box-shadow: 0px 0.25rem 0.5rem;
+}
+.adivinhar, .reiniciar {
     font-size: 2rem;
     cursor: pointer;
 }
