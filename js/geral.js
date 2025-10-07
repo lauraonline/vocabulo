@@ -1,5 +1,5 @@
 // constantes e botões
-const chave = "linha";
+let chave = "";
 const adivinhar = document.querySelector(".adivinhar");
 const palpites = document.querySelector(".palpites");
 const todasLetras = document.querySelectorAll(".letra");
