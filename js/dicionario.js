@@ -1,5 +1,9 @@
 const dicionario = [
     "sagaz",
+    "menor",
+    "grama",
+    "grana",
+    "papel",
     "amigo",
     "pleno",
     "peixe",
@@ -278,5 +282,7 @@ const dicionario = [
     "volta",
     "vulgo",
     "vulto",
-    "zumbi"
+    "zumbi",
+    "limpa",
+    "menos"
 ];
