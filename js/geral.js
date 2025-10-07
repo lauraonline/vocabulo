@@ -8,6 +8,11 @@ const todasLetras = document.querySelectorAll(".letra");
 // TODO: Implementar dicionario
 // funções
 
+function sortearPalavra() {
+    const indice = Math.floor(Math.random() * dicionario.length);
+    chave = dicionario[indice];
+    console.log("Nova palavra: " + chave);
+}
 // function tratamentoEntradaUsuario(event) {
 //     
 // }
@@ -27,6 +32,7 @@ function criarPopup(texto) {
     }, 3000);
 }
 function reiniciarJogo() {
+    sortearPalavra();
     for (let i = 0; i < todasLetras.length; i++) {
         todasLetras[i].value = null;
         todasLetras[i].classList.remove("letra_verde", "letra_amarela", "letra_cinza");
@@ -42,7 +48,7 @@ function reiniciarJogo() {
 }
 function fimDeJogo(isGanhou) {
     vitoria = "Parabéns, você acertou!"
-    derrota = "Fim de jogo! A palavra era " + chave;
+    derrota = "Fim de jogo! A palavra era " + chave.toUpperCase();
     const msg = isGanhou ? vitoria : derrota; 
 
     criarPopup(msg);
@@ -77,6 +83,7 @@ function selecaoeExclusaoValor (lista, valor) {
 }
 
 // lógica a ser executada no momento de carregamento da página
+sortearPalavra();
 document.addEventListener("keydown", function(event) {
     if (event.key === "Enter") { // ativar o botão "adivinhar" ou "reiniciar" com a tecla ENTER, pra melhor jogabilidade sem precisar usar o mouse
         const reiniciar = document.querySelector(".reiniciar");
@@ -151,10 +158,14 @@ adivinhar.addEventListener("click", function() {
             palavra[i].setAttribute("disabled", "true");
         }
         // TODO: Analisar se dá pra fazer as funções abaixo SEM usar as classes índice (.letra1, .letra2, etc), pra viabilizar a remoção das classes índice
-        for (let i = 0; i < 5; i++) { // fazer com que a próxima linha esteja editável
-            let seletorProxLetra = ".letra" + (i+1) + ":not(.letra_verde, .letra_amarela, .letra_cinza)";
-            document.querySelector(seletorProxLetra).removeAttribute("disabled");
+        if (document.querySelector(".letra1:not(.letra_verde, .letra_amarela, .letra_cinza)")) {
+            for (let i = 0; i < 5; i++) { // fazer com que a próxima linha esteja editável
+                let seletorProxLetra = ".letra" + (i+1) + ":not(.letra_verde, .letra_amarela, .letra_cinza)";
+                document.querySelector(seletorProxLetra).removeAttribute("disabled");
+            }
+            document.querySelector(".letra1:not(:disabled)").focus(); // automaticamente posiciona o cursor na próxima linha
+        } else {
+            fimDeJogo(false);
         }
-        document.querySelector(".letra1:not(:disabled)").focus(); // automaticamente posiciona o cursor na próxima linha
     }
 });
