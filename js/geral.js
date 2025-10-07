@@ -125,6 +125,10 @@ adivinhar.addEventListener("click", function() {
         criarPopup("Todos os campos do seu palpite devem ser letras!");
         return;
     }
+    if (dicionario.includes(palavraString) === false) {
+        criarPopup("Seu palpite não está na lista de possíveis respostas. Tente novamente!");
+        return;
+    }
     if (palavraString === chave) {
         for (let i = 0; i < 5; i++) { // procedimento de vitória
             palavra[i].classList.add("letra_verde");
