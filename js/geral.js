@@ -5,14 +5,13 @@ const palpites = document.querySelector(".palpites");
 const todasLetras = document.querySelectorAll(".letra");
 
 // TODO: Fazer funcionalidade de derrota ao encher todas as linhas
-// TODO: Fazer fade-in fade-out do popup
 // TODO: Implementar dicionario
 // funções
 
 // function tratamentoEntradaUsuario(event) {
 //     
 // }
-function criarPopup(texto, duracao) {
+function criarPopup(texto) {
     const popupExistente = document.querySelector(".popup");
     if (popupExistente != null) {
         popupExistente.remove();
@@ -25,7 +24,7 @@ function criarPopup(texto, duracao) {
 
     setTimeout(() => {
         popup.remove();
-    }, duracao);
+    }, 3000);
 }
 function reiniciarJogo() {
     for (let i = 0; i < todasLetras.length; i++) {
@@ -46,7 +45,7 @@ function fimDeJogo(isGanhou) {
     derrota = "Fim de jogo! A palavra era " + chave;
     const msg = isGanhou ? vitoria : derrota; 
 
-    criarPopup(msg, 3000);
+    criarPopup(msg);
     adivinhar.style.display = "none";
 
     const reiniciar2 = document.createElement("button");
@@ -110,13 +109,13 @@ adivinhar.addEventListener("click", function() {
     const palavraString = palavraToString(palavra).toLowerCase();
     // TODO: organizar o eventlistener pra chamar funções que chamam funções etc
     if (palavraString.length != 5) {
-        criarPopup("Preencha todos os campos!", 4000)
+        criarPopup("Preencha todos os campos!")
         return;
     }
     // TODO: ver se tem um jeito melhor de validar pra apenas letras
     const validacaoRegex = /^[a-z]+$/;
     if (validacaoRegex.test(palavraString) === false) {
-        criarPopup("Todos os campos do seu palpite devem ser letras!", 5000);
+        criarPopup("Todos os campos do seu palpite devem ser letras!");
         return;
     }
     if (palavraString === chave) {

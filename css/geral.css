@@ -92,6 +92,7 @@ nav a:hover, .adivinhar:hover, .reiniciar:hover, #dark:hover {
     font-weight: 700;
     z-index: 99;
     box-shadow: 0px 0.25rem 0.5rem;
+    animation: fade 3s ease-in-out;
 }
 .adivinhar, .reiniciar {
     font-size: 2rem;
@@ -123,4 +124,14 @@ nav a:hover, .adivinhar:hover, .reiniciar:hover, #dark:hover {
 footer {
     margin-top: 2rem;
     font-size: 1.5rem;
+}
+@keyframes fade {
+    0%, 100% {
+        opacity: 0;
+        transform: translate(-50%, -20px);
+    }
+    10%, 90% {
+        opacity: 1;
+        transform: translate(-50%, 0);
+    }
 }
