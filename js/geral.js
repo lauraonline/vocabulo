@@ -4,6 +4,9 @@ const adivinhar = document.querySelector(".adivinhar");
 const palpites = document.querySelector(".palpites");
 const todasLetras = document.querySelectorAll(".letra");
 
+// TODO: Fazer funcionalidade de derrota ao encher todas as linhas
+// TODO: Fazer fade-in fade-out do popup
+// TODO: Implementar dicionario
 // funções
 
 // function tratamentoEntradaUsuario(event) {
@@ -74,7 +77,6 @@ function selecaoeExclusaoValor (lista, valor) {
     }
 }
 
-// TODO: Usar criação dinâmica de elementos (createElement, appendChild, remove)
 // lógica a ser executada no momento de carregamento da página
 document.addEventListener("keydown", function(event) {
     if (event.key === "Enter") { // ativar o botão "adivinhar" ou "reiniciar" com a tecla ENTER, pra melhor jogabilidade sem precisar usar o mouse
