@@ -1,6 +1,8 @@
 const dicionario = [
     "sagaz",
     "menor",
+    "terno",
+    "prata",
     "grama",
     "grana",
     "papel",
