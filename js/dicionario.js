@@ -286,5 +286,6 @@ const dicionario = [
     "vulto",
     "zumbi",
     "limpa",
-    "menos"
+    "menos",
+    "rifle",
 ];
