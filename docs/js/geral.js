@@ -1,5 +1,6 @@
 // constantes e botões
 let chave = "";
+let palavrasAPI = []; // palavras carregadas da API
 const adivinhar = document.querySelector(".adivinhar");
 const palpites = document.querySelector(".palpites");
 const todasLetras = document.querySelectorAll(".letra");
@@ -8,9 +9,24 @@ const todasLetras = document.querySelectorAll(".letra");
 // TODO: Implementar palavras com acento
 // funções
 
+async function carregarPalavras() {
+    try {
+        const response = await fetch('http://localhost:3000/palavra');
+        const dados = await response.json();
+        palavrasAPI = dados.map(item => item.palavra);
+        console.log("Palavras carregadas da API:", palavrasAPI.length);
+        sortearPalavra();
+    } catch (error) {
+        console.warn("API não disponível, usando dicionário local:", error.message);
+        sortearPalavra(); // usa o dicionario.js como fallback
+    }
+}
+
 function sortearPalavra() {
-    const indice = Math.floor(Math.random() * dicionario.length);
-    chave = dicionario[indice];
+    // Usa palavras da API se disponíveis, senão usa o dicionário local
+    const listaPalavras = palavrasAPI.length > 0 ? palavrasAPI : dicionario;
+    const indice = Math.floor(Math.random() * listaPalavras.length);
+    chave = listaPalavras[indice];
     console.log("Nova palavra: " + chave);
 }
 // function tratamentoEntradaUsuario(event) {
@@ -93,7 +109,7 @@ function selecaoeExclusaoValor (lista, valor) {
 }
 
 // lógica a ser executada no momento de carregamento da página
-sortearPalavra();
+carregarPalavras();
 document.addEventListener("keydown", function(event) {
     if (event.key === "Enter") { // ativar o botão "adivinhar" ou "reiniciar" com a tecla ENTER, pra melhor jogabilidade sem precisar usar o mouse
         const reiniciar = document.querySelector(".reiniciar");
@@ -135,7 +151,8 @@ adivinhar.addEventListener("click", function() {
         criarPopup("Todos os campos do seu palpite devem ser letras!");
         return;
     }
-    if (dicionario.includes(palavraString) === false) {
+    const listaPalavras = palavrasAPI.length > 0 ? palavrasAPI : dicionario;
+    if (listaPalavras.includes(palavraString) === false) {
         criarPopup("Seu palpite não está na lista de possíveis respostas. Tente novamente!");
         return;
     }

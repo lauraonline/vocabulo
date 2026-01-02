@@ -1,7 +1,10 @@
 import { createTablePalavra, insertPalavra, selectPalavras, selectPalavraById, updatePalavra, deletePalavra } from './controller/Palavra.js';
 
 import express from 'express';
+import cors from 'cors';
+
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 createTablePalavra();
